@@ -30,7 +30,7 @@ class CardOne extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 20, right: 20),
             child: Transform.translate(
-              offset: Offset(0, -70),
+              offset: Offset(0, -73),
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(

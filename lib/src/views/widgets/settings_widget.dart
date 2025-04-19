@@ -24,9 +24,7 @@ class SettingsWidget extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SvgPicture.asset(
-              iconPath,
-            ),
+            SvgPicture.asset(iconPath),
             const SizedBox(width: 16),
             Text(
               text,
@@ -39,10 +37,7 @@ class SettingsWidget extends StatelessWidget {
           ],
         ),
         SizedBox(height: 16),
-        Divider(
-          color: dividerColor,
-          thickness: dividerThickness,
-        ),
+        Divider(color: dividerColor, thickness: dividerThickness),
       ],
     );
   }

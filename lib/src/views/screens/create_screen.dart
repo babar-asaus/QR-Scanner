@@ -25,332 +25,317 @@ class CreateScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF2F7F5),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Title
-              const Text(
-                qrScanner,
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 18,
-                  color: Colors.black,
-                  letterSpacing: 0.5,
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Title
+                const Text(
+                  qrScanner,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 18,
+                    color: Colors.black,
+                    letterSpacing: 0.5,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 24),
-
-              // QR Options
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  InkWell(
-                    onTap:
-                        () => {
+                const SizedBox(height: 24),
+        
+                // QR Options
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    InkWell(
+                      onTap:
+                          () => {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => CreateLocation(),
+                              ),
+                            ),
+                          },
+                      child: SocialWidget(
+                        iconPath: "assets/icons/location_svg.svg",
+                        label: "Location",
+                      ),
+                    ),
+                    InkWell(
+                      onTap:
+                          () => {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CreateText(),
+                          ),
+                        ),
+                      },
+                      child: SocialWidget(
+                        iconPath: "assets/icons/text_svg.svg",
+                        label: "Text",
+                      ),
+                    ),
+                    InkWell(
+                      onTap:
+                          () => {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CreateWifi(),
+                          ),
+                        ),
+                      },
+                      child: SocialWidget(
+                        iconPath: "assets/icons/wifi_svg.svg",
+                        label: "Wifi",
+                      ),
+                    ),
+                    InkWell(
+                      onTap:
+                          () => {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CreateUrl(),
+                          ),
+                        ),
+                      },
+                      child: SocialWidget(
+                        iconPath: "assets/icons/url_svg.svg",
+                        label: "Url",
+                      ),
+                    ),
+                  ],
+                ),
+        
+                const SizedBox(height: 32),
+        
+        // Main Features Title
+                const Text(
+                  'Main Features',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 18,
+                    color: Colors.black,
+                    letterSpacing: 0.5,
+                  ),
+                ),
+                const SizedBox(height: 16),
+        
+        // First Row of Cards
+                Row(
+                  children: [
+                    Expanded(
+                      child: InkWell(
+                        onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(
-                              builder: (context) => CreateLocation(),
-                            ),
-                          ),
+                            MaterialPageRoute(builder: (context) => CreateEvent()),
+                          );
                         },
-                    child: SocialWidget(
-                      iconPath: "assets/icons/location_svg.svg",
-                      label: "Location",
-                    ),
-                  ),
-                  InkWell(
-                    onTap:
-                        () => {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CreateText(),
+                        child: FeatureCard(
+                          title: "Event",
+                          subtitle: "Manage Event",
+                          iconPath: "assets/icons/calendar_svg.svg",
+                          backgroundColor: const Color(0x1FEC2525),
+                          iconBackgroundColor: const Color(0x67EC2525),
+                          subtitleColor: const Color(0x66000000),
                         ),
                       ),
-                    },
-                    child: SocialWidget(
-                      iconPath: "assets/icons/text_svg.svg",
-                      label: "Text",
                     ),
-                  ),
-                  InkWell(
-                    onTap:
-                        () => {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CreateWifi(),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => CreateHotel()),
+                          );
+                        },
+                        child: FeatureCard(
+                          title: "Hotel",
+                          subtitle: "Hotel Management",
+                          iconPath: "assets/icons/hotel_svg.svg",
+                          backgroundColor: const Color(0x1F1F58FF),
+                          iconBackgroundColor: const Color(0x6F1F58FF),
+                          subtitleColor: const Color(0x66000000),
                         ),
                       ),
-                    },
-                    child: SocialWidget(
-                      iconPath: "assets/icons/wifi_svg.svg",
-                      label: "Wifi",
                     ),
-                  ),
-                  InkWell(
-                    onTap:
-                        () => {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CreateUrl(),
-                        ),
-                      ),
-                    },
-                    child: SocialWidget(
-                      iconPath: "assets/icons/url_svg.svg",
-                      label: "Url",
-                    ),
-                  ),
-                ],
-              ),
-
-              const SizedBox(height: 32),
-
-              // Main Features Title
-              const Text(
-                'Main Features',
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 18,
-                  color: Colors.black,
-                  letterSpacing: 0.5,
+                  ],
                 ),
-              ),
-              const SizedBox(height: 16),
-              // Main Features Grid
-              Row(
-                children: [
-                  Expanded(
-                    child: InkWell(
-                      onTap:
-                          () => {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => CreateEvent(),
-                          ),
+                const SizedBox(height: 16),
+        
+        // Second Row of Cards
+                Row(
+                  children: [
+                    Expanded(
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => CreateRestaurant()),
+                          );
+                        },
+                        child: FeatureCard(
+                          title: "Restaurant",
+                          subtitle: "Restaurant",
+                          iconPath: "assets/icons/rest_svg.svg",
+                          backgroundColor: const Color(0x1F0CBEFF),
+                          iconBackgroundColor: const Color(0x6F0CBEFF),
+                          subtitleColor: const Color(0x66000000),
                         ),
-                      },
-                      child: FeatureCard(
-                        title: "Event",
-                        subtitle: "Manage Event",
-                        iconPath: "assets/icons/calendar_svg.svg",
-                        backgroundColor: const Color(0x1FEC2525),
-                        // Custom background
-                        iconBackgroundColor: const Color(0x67EC2525),
-                        // Custom icon circle color
-                        subtitleColor: Color(0x66000000), // Custom subtitle color
                       ),
                     ),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: InkWell(
-                      onTap:
-                          () => {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => CreateHotel(),
-                          ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => CreateCard()),
+                          );
+                        },
+                        child: FeatureCard(
+                          title: "V Card",
+                          subtitle: "Card",
+                          iconPath: "assets/icons/card_svg.svg",
+                          backgroundColor: const Color(0x1FFF8410),
+                          iconBackgroundColor: const Color(0x6FFF8410),
+                          subtitleColor: const Color(0x66000000),
                         ),
-                      },
-                      child: FeatureCard(
-                        title: "Hotel",
-                        subtitle: "Hotel Management",
-                        iconPath: "assets/icons/hotel_svg.svg",
-                        backgroundColor: const Color(0x1F1F58FF),
-                        // Custom background
-                        iconBackgroundColor: const Color(0x6F1F58FF),
-                        // Custom icon circle color
-                        subtitleColor: Color(0x66000000), // Custom subtitle color
                       ),
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
-              Row(
-                children: [
-                  Expanded(
-                    child: InkWell(
-                      onTap:
-                          () => {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => CreateRestaurant(),
-                          ),
-                        ),
-                      },
-                      child: FeatureCard(
-                        title: "Restaurant",
-                        subtitle: "Restaurant",
-                        iconPath: "assets/icons/rest_svg.svg",
-                        backgroundColor: const Color(0x1F0CBEFF),
-                        // Custom background
-                        iconBackgroundColor: const Color(0x6F0CBEFF),
-                        // Custom icon circle color
-                        subtitleColor: Color(0x66000000), // Custom subtitle color
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: InkWell(
-                      onTap:
-                          () => {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => CreateCard(),
-                          ),
-                        ),
-                      },
-                      child: FeatureCard(
-                        title: "V Card",
-                        subtitle: "Card",
-                        iconPath: "assets/icons/card_svg.svg",
-                        backgroundColor: const Color(0x1FFF8410),
-                        // Custom background
-                        iconBackgroundColor: const Color(0x6FFF8410),
-                        // Custom icon circle color
-                        subtitleColor: Color(0x66000000), // Custom subtitle color
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-
-              const SizedBox(height: 32),
-
-              // Social Media
-              const Text(
-                'Social Media',
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 18,
-                  color: Colors.black,
-                  letterSpacing: 0.5,
+                  ],
                 ),
-              ),
-
-              const SizedBox(height: 16),
-
-              // Social Media Grid - First Row
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  InkWell(
-                    onTap:
-                        () => {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CreateFacebook(),
-                        ),
-                      ),
-                    },
-                    child: SocialWidget(
-                      iconPath: "assets/icons/fb_svg.svg",
-                      label: "Facebook",
-                    ),
+        
+                const SizedBox(height: 32),
+        
+                // Social Media
+                const Text(
+                  'Social Media',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 18,
+                    color: Colors.black,
+                    letterSpacing: 0.5,
                   ),
-                  InkWell(
-                    onTap:
-                        () => {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CreateLinkedin(),
+                ),
+        
+                const SizedBox(height: 16),
+        
+                // Social Media Grid - First Row
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    InkWell(
+                      onTap:
+                          () => {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CreateFacebook(),
+                          ),
                         ),
+                      },
+                      child: SocialWidget(
+                        iconPath: "assets/icons/fb_svg.svg",
+                        label: "Facebook",
                       ),
-                    },
-                    child: SocialWidget(
-                      iconPath: "assets/icons/in_svg.svg",
-                      label: "LinkedIn",
                     ),
-                  ),
-                  InkWell(
-                    onTap:
-                        () => {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CreateWhatsapp(),
+                    InkWell(
+                      onTap:
+                          () => {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CreateLinkedin(),
+                          ),
                         ),
+                      },
+                      child: SocialWidget(
+                        iconPath: "assets/icons/in_svg.svg",
+                        label: "LinkedIn",
                       ),
-                    },
-                    child: SocialWidget(
-                      iconPath: "assets/icons/whats_app_svg.svg",
-                      label: "WhatsApp",
                     ),
-                  ),
-                  InkWell(
-                    onTap:
-                        () => {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CreateTwitter(),
+                    InkWell(
+                      onTap:
+                          () => {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CreateWhatsapp(),
+                          ),
                         ),
+                      },
+                      child: SocialWidget(
+                        iconPath: "assets/icons/whats_app_svg.svg",
+                        label: "WhatsApp",
                       ),
-                    },
-                    child: SocialWidget(
-                      iconPath: "assets/icons/twitter_svg.svg",
-                      label: "Twitter",
                     ),
-                  ),
-                ],
-              ),
-
-              const SizedBox(height: 16),
-
-              // Social Media Grid - Second Row
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SizedBox(width: MediaQuery.of(context).size.width * 0.05),
-                  InkWell(
-                    onTap:
-                        () => {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CreateYoutube(),
+                    InkWell(
+                      onTap:
+                          () => {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CreateTwitter(),
+                          ),
                         ),
+                      },
+                      child: SocialWidget(
+                        iconPath: "assets/icons/twitter_svg.svg",
+                        label: "Twitter",
                       ),
-                    },
-                    child: SocialWidget(
-                      iconPath: "assets/icons/youtube_svg.svg",
-                      label: "Youtube",
                     ),
-                  ),
-                  SizedBox(width: MediaQuery.of(context).size.width * 0.05),
-                  InkWell(
-                    onTap:
-                        () => {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CreateInstagram(),
+                  ],
+                ),
+        
+                const SizedBox(height: 16),
+        
+                // Social Media Grid - Second Row
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(width: MediaQuery.of(context).size.width * 0.05),
+                    InkWell(
+                      onTap:
+                          () => {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CreateYoutube(),
+                          ),
                         ),
+                      },
+                      child: SocialWidget(
+                        iconPath: "assets/icons/youtube_svg.svg",
+                        label: "Youtube",
                       ),
-                    },
-                    child: SocialWidget(
-                      iconPath: "assets/icons/instagram_svg.svg",
-                      label: "Instagram",
                     ),
-                  ),
-                ],
-              ),
-            ],
+                    SizedBox(width: MediaQuery.of(context).size.width * 0.05),
+                    InkWell(
+                      onTap:
+                          () => {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CreateInstagram(),
+                          ),
+                        ),
+                      },
+                      child: SocialWidget(
+                        iconPath: "assets/icons/instagram_svg.svg",
+                        label: "Instagram",
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
