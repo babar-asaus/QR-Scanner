@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:qr_scanner/src/views/screens/utility/utility_results/url_result.dart';
 
 import '../../widgets/dashboard_label.dart';
 import '../../widgets/social_widget.dart';
 
-class CreateUrl extends StatelessWidget {
+class CreateUrl extends StatefulWidget {
   const CreateUrl({super.key});
+
+  @override
+  State<CreateUrl> createState() => _CreateUrlState();
+}
+
+class _CreateUrlState extends State<CreateUrl> {
+
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController _urlController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +36,11 @@ class CreateUrl extends StatelessWidget {
               padding: const EdgeInsets.only(left: 15, top: 50),
               child: Align(
                 alignment: Alignment.topLeft,
-                child: Icon(Icons.arrow_back, color: Colors.white),
+                child: GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Icon(Icons.arrow_back, color: Colors.white)),
               ),
             ),
           ),
@@ -52,13 +66,18 @@ class CreateUrl extends StatelessWidget {
                       ),
                       SizedBox(height: 10),
                       DashboardLabel("Websites"),
-                      TextField(
-                        keyboardType: TextInputType.text,
-                        decoration: InputDecoration(
-                          hintText: "Please fill in the websites address",
-                          hintStyle: TextStyle(
-                            fontSize: 12,
-                            color: Colors.grey,
+                      Form(
+                        key: _formKey,
+                        child: TextFormField(
+                          controller: _urlController,
+                          validator: _notEmptyValidator,
+                          keyboardType: TextInputType.text,
+                          decoration: InputDecoration(
+                            hintText: "Please fill in the websites address",
+                            hintStyle: TextStyle(
+                              fontSize: 12,
+                              color: Colors.grey,
+                            ),
                           ),
                         ),
                       ),
@@ -69,7 +88,9 @@ class CreateUrl extends StatelessWidget {
             ),
           ),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              _submit();
+            },
             style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
             child: Padding(
               padding: const EdgeInsets.only(left: 30, right: 30),
@@ -79,5 +100,25 @@ class CreateUrl extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  String? _notEmptyValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return "This field is required";
+    }
+    return null;
+  }
+
+  void _submit() {
+    if (_formKey.currentState!.validate()) {
+      final url = _urlController.text;
+      String urlData = "Url:$url";
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => UrlResult(data: urlData,),
+        ),
+      );
+    }
   }
 }

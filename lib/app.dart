@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:qr_scanner/src/views/screens/home_screen.dart';
 import 'package:qr_scanner/src/views/screens/splash_screen.dart';
 
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -20,7 +21,6 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Poppins',
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: SplashScreen(),
     );
   }
 }

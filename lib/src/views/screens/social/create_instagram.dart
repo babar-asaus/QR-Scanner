@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:qr_scanner/src/views/screens/social/social_results/instagram_result.dart';
 
 import '../../widgets/dashboard_label.dart';
 import '../../widgets/social_widget.dart';
 
-class CreateInstagram extends StatelessWidget {
+class CreateInstagram extends StatefulWidget {
   const CreateInstagram({super.key});
+
+  @override
+  State<CreateInstagram> createState() => _CreateInstagramState();
+}
+
+class _CreateInstagramState extends State<CreateInstagram> {
+
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController _inController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +36,11 @@ class CreateInstagram extends StatelessWidget {
               padding: const EdgeInsets.only(left: 15, top: 50),
               child: Align(
                 alignment: Alignment.topLeft,
-                child: Icon(Icons.arrow_back, color: Colors.white),
+                child: GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Icon(Icons.arrow_back, color: Colors.white)),
               ),
             ),
           ),
@@ -52,13 +66,18 @@ class CreateInstagram extends StatelessWidget {
                       ),
                       SizedBox(height: 10),
                       DashboardLabel("User ID"),
-                      TextField(
-                        keyboardType: TextInputType.text,
-                        decoration: InputDecoration(
-                          hintText: "Please Enter Your User Id",
-                          hintStyle: TextStyle(
-                            fontSize: 12,
-                            color: Colors.grey,
+                      Form(
+                        key: _formKey,
+                        child: TextFormField(
+                          controller: _inController,
+                          validator: _notEmptyValidator,
+                          keyboardType: TextInputType.text,
+                          decoration: InputDecoration(
+                            hintText: "Please Enter Your User Id",
+                            hintStyle: TextStyle(
+                              fontSize: 12,
+                              color: Colors.grey,
+                            ),
                           ),
                         ),
                       ),
@@ -69,7 +88,9 @@ class CreateInstagram extends StatelessWidget {
             ),
           ),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              _submit();
+            },
             style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
             child: Padding(
               padding: const EdgeInsets.only(left: 30, right: 30),
@@ -80,4 +101,25 @@ class CreateInstagram extends StatelessWidget {
       ),
     );
   }
+
+  String? _notEmptyValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return "This field is required";
+    }
+    return null;
+  }
+
+  void _submit() {
+    if (_formKey.currentState!.validate()) {
+      final inUrl = _inController.text;
+      String inData = "https://www.linkedin.com/in/$inUrl";
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => InstagramResult(data: inData,),
+        ),
+      );
+    }
+  }
+
 }
